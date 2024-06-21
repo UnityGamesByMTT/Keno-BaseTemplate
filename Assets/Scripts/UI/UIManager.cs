@@ -25,6 +25,7 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private Button Delete_Button;
     [SerializeField]
+    private Button Quit_Button;
 
     [Header("Texts")]
     private TMP_Text Count_Text;
@@ -84,6 +85,9 @@ public class UIManager : MonoBehaviour
         if (Delete_Button) Delete_Button.onClick.RemoveAllListeners();
         if (Delete_Button) Delete_Button.onClick.AddListener(CleanButtons);
 
+        if (Quit_Button) Quit_Button.onClick.RemoveAllListeners();
+        if (Quit_Button) Quit_Button.onClick.AddListener(CallOnExitFunction);
+
         RandomCount = 2;
         stake = 5;
         winning = 0;
@@ -103,6 +107,11 @@ public class UIManager : MonoBehaviour
         if (Delete_Button) Delete_Button.interactable = false;
         if (Play_Button) Play_Button.interactable = false;
         KenoManager.PlayDummyGame();
+    }
+
+    private void CallOnExitFunction()
+    {
+        Application.ExternalCall("window.parent.postMessage", "onExit", "*");
     }
 
     private void ChangeCount(bool type)
