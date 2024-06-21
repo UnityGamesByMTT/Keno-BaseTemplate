@@ -40,6 +40,7 @@ public class KenoBehaviour : MonoBehaviour
 
     void Start()
     {
+        Application.ExternalCall("window.parent.postMessage", "OnEnter", "*");
         for (int i = 0; i < 80; i++) 
         {
             GameObject Kc = Instantiate(KenoCell_Prefab, Keno_Container);
